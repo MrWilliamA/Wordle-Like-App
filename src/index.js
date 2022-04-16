@@ -49,5 +49,31 @@ getRandomWord();
 
 
 
+function moveOnMax(field, nextFieldID) { 
+    const maxLength = 1;
+    let nextId =  parseInt(nextFieldID.match(/\d+/)[0], 10) + 1;
+    console.log(nextId);
+    
+    let nextInput = document.getElementById(`input${nextId}`);
+    
+    if (field.length >= maxLength) { 
+        nextInput.focus(); 
+    } 
+}  
 
+
+for (let i = 0 ; i < inputList.length; i++) {
+
+    inputList[i].addEventListener("keyup", function(event){
+        let thisInput = event.target.value;
+        let nextInput = event.target.getAttribute('id');
+        
+// move this to happen only once row is submitted
+event.target.style.pointerEvents = "none";
+      
+        moveOnMax(thisInput, nextInput);
+        
+      });
+
+ }
   

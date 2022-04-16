@@ -20,17 +20,25 @@ body {
     justify-content: space-evenly;
 }
 
-.letterInput {
+#mainBoard article {
     border: solid 1px grey;
     flex-basis: 18%;
     max-height: 97px;
 }
 
-.letterInput input {
+#mainBoard input {
     width: 100%;
     height: 100%;
     background: transparent;
     border: none;
+    text-transform: capitalize;
+    color: white;
+    text-align: center;
+    font-size: 6vw;
+}
+
+#mainBoard input:not(#row1 input) {
+    pointer-events: none;
 }
 
 #keyboard {
@@ -61,3 +69,4 @@ body {
   .disabled input {
     pointer-events:none;
   }
+
