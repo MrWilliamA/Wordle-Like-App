@@ -25,8 +25,6 @@ let inputListNode = document.querySelectorAll('input');
 
 let inputList = Array.prototype.slice.call(inputListNode);
 
-console.log(inputList)
-
 const options = {
 	method: 'GET',
 	headers: {
@@ -35,24 +33,68 @@ const options = {
 	}
 };
 
+// const getRandomWord = async (word) => {
+//     fetch('https://wordsapiv1.p.rapidapi.com/words/?letters=5&random=true', options)
+// 	.then(response => response.json())
+// 	.then(response => {
+
+//         const excludedCharacters = ['-', '_', '/'];
+
+//         let n = excludedCharacters.includes(response);
+
+//         if(!n ) {
+//          randomWord = response.word.toUpperCase().split("");
+//         } else {
+//             console.log("faulty word");
+//         }
+
+//         })
+// 	.catch(err => console.error(err));
+// };
+
+// getRandomWord();
+
+//========//
+// function getRandomWord() {
+//     return fetch('https://wordsapiv1.p.rapidapi.com/words/?letters=5&random=true')
+//       .then(response => response.json())
+//       .then(response => {
+//           return unfilteredWord = response.word;
+//       }
+//   }
+
+//   function filterWord(){
+//     const excludedCharacters = ['-', '_', '/'];
+//     let n = excludedCharacters.includes(response);
+    
+//     if(!n ) {
+//         randomWord = response.word.toUpperCase().split("");
+//     } else {
+//         getRandomWord();
+//     }
+    
+//   }
+//   filterWord();
+
+//=======//
+
 const getRandomWord = async (word) => {
     fetch('https://wordsapiv1.p.rapidapi.com/words/?letters=5&random=true', options)
 	.then(response => response.json())
 	.then(response => {
-         randomWord = response.word.toUpperCase().split("");
-
-    })
+        randomWord = response.word.replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase().split("");
+        console.log(randomWord)
+        })
 	.catch(err => console.error(err));
 };
 
 getRandomWord();
 
 
-
 function moveOnMax(field, nextFieldID) { 
     const maxLength = 1;
     let nextId =  parseInt(nextFieldID.match(/\d+/)[0], 10) + 1;
-    console.log(nextId);
+    //console.log(nextId);
     
     let nextInput = document.getElementById(`input${nextId}`);
     
@@ -65,15 +107,35 @@ function moveOnMax(field, nextFieldID) {
 for (let i = 0 ; i < inputList.length; i++) {
 
     inputList[i].addEventListener("keyup", function(event){
-        let thisInput = event.target.value;
+        let thisInput = event.target
+        let thisInputValue = event.target.value;
         let nextInput = event.target.getAttribute('id');
-        
+
 // move this to happen only once row is submitted
-event.target.style.pointerEvents = "none";
+//event.target.style.pointerEvents = "none";
       
-        moveOnMax(thisInput, nextInput);
-        
+        moveOnMax(thisInputValue, nextInput);
+        console.log(thisInput)
+        submit(thisInput);
       });
 
  }
   
+ const submit = (currentInput) => {
+    if (currentInput === document.activeElement) {
+        console.log('Element has focus!');
+        checkAnswer();
+    } else {
+        console.log(`Element is not focused.`);
+    }
+
+ }
+
+ const checkAnswer = async () => {
+    console.log(randomWord)
+
+    const guess = [];
+
+    const rows = document.querySelectorAll('.inputRow');
+    console.log(rows)
+ }
