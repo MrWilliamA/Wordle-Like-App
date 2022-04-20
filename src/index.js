@@ -3,6 +3,7 @@
 // All interactions between the client and the API should be handled asynchronously 
 //incorporate at least 3 separate event listeners.
 //Set up a JSON server in your project to persist your app's interactivity. i.e. store scores
+// install eslint and clean things up
 
 // split user text into array - capitalised
 // compare the two, return true or false functions
@@ -103,14 +104,39 @@ function moveOnMax(field, nextFieldID) {
     } 
 }  
 
-// const checkAnswer = (currentRow) => {
-//     console.log(randomWord)
+rightAsnwer() {
 
-//     const guess = [];
+}
 
-//     const rows = document.querySelectorAll('.inputRow input');
-//     console.log(currentRow)
-//  }
+wrongAnswer() {
+
+}
+
+const checkAnswer = (thisInput) => {
+    if (thisInput === document.activeElement) {
+            
+        const rows = thisInput.parentElement.parentElement;
+
+        const test = rows.querySelectorAll(`input`);
+
+        let btnsArr = Array.prototype.slice.call(test);
+    
+        let guessArray = [];
+        btnsArr.forEach((inputValue) => {        
+            guessArray.push(inputValue.value.toUpperCase());            
+        });
+       const guess = guessArray.join('');
+       const answer = randomWord.join('');
+       console.log(typeof guess);
+       console.log(typeof answer);
+
+        if(guess === answer) {
+            rightAsnwer();
+        } else {
+            wrongAnswer();
+        }
+    } 
+ }
 
 for (let i = 0 ; i < inputList.length; i++) {
 
@@ -121,29 +147,14 @@ for (let i = 0 ; i < inputList.length; i++) {
 
         moveOnMax(thisInputValue, nextInput);
 
-        if (thisInput === document.activeElement) {
-            
-            const rows = thisInput.parentElement.parentElement;
-
-            console.log(rows)
-            const test = rows.querySelectorAll(`input`);
-
-            let btnsArr = Array.prototype.slice.call(test);
-        
-            let guess = []
-            btnsArr.forEach((inputValue) => {        
-                guess.push(inputValue.value);
-                console.log(guess)
-            });
-
-            
-
-
-        } 
+        checkAnswer(thisInput);
 
       });
 
     }
+
+
+
 
 
 
