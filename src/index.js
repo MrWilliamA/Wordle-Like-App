@@ -103,6 +103,14 @@ function moveOnMax(field, nextFieldID) {
     } 
 }  
 
+// const checkAnswer = (currentRow) => {
+//     console.log(randomWord)
+
+//     const guess = [];
+
+//     const rows = document.querySelectorAll('.inputRow input');
+//     console.log(currentRow)
+//  }
 
 for (let i = 0 ; i < inputList.length; i++) {
 
@@ -111,31 +119,34 @@ for (let i = 0 ; i < inputList.length; i++) {
         let thisInputValue = event.target.value;
         let nextInput = event.target.getAttribute('id');
 
-// move this to happen only once row is submitted
-//event.target.style.pointerEvents = "none";
-      
         moveOnMax(thisInputValue, nextInput);
-        console.log(thisInput)
-        submit(thisInput);
+
+        if (thisInput === document.activeElement) {
+            
+            const rows = thisInput.parentElement.parentElement;
+
+            console.log(rows)
+            const test = rows.querySelectorAll(`input`);
+
+            let btnsArr = Array.prototype.slice.call(test);
+        
+            let guess = []
+            btnsArr.forEach((inputValue) => {        
+                guess.push(inputValue.value);
+                console.log(guess)
+            });
+
+            
+
+
+        } 
+
       });
 
- }
-  
- const submit = (currentInput) => {
-    if (currentInput === document.activeElement) {
-        console.log('Element has focus!');
-        checkAnswer();
-    } else {
-        console.log(`Element is not focused.`);
     }
 
- }
 
- const checkAnswer = async () => {
-    console.log(randomWord)
 
-    const guess = [];
-
-    const rows = document.querySelectorAll('.inputRow');
-    console.log(rows)
- }
+    // move this to happen only once row is submitted
+//event.target.style.pointerEvents = "none";
+      
