@@ -6,7 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle-Like App</title>
     <link rel="stylesheet" href="src/style.css">
-
+   
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
+<link rel="icon" type="image/x-icon" href="./src/images/favicon.png`">
 </head>
 <body>
 
@@ -90,7 +94,15 @@
 
        </div>
     </div>
-
+     <div id="finishedBox">
+          <div class="finishedBoxInner">
+               <h2>FINISHED!</h2>
+               <p>This game has ended</p>
+               <p>Your score:</p>
+               <p id="userScore"></p>
+               <button id="restart" onClick="window.location.reload();">RESTART</button>
+          </div>
+     </div>
     <script src="src/index.js"></script>
 
 </body>

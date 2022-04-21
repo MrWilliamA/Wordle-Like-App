@@ -5,19 +5,15 @@
 //Set up a JSON server in your project to persist your app's interactivity. i.e. store scores
 // install eslint and clean things up
 
-// split user text into array - capitalised
-// compare the two, return true or false functions
 
 // loop through each input and save variable
-// each textbox max length is 1, make a function onkeyup event. In this function if length is equal or exceed to 1 then you need to write second textbox focus function calls.
-// function moveOnMax(field, nextFieldID) { if (field.value.length >= field.maxLength) { nextFieldID.focus(); } }  
 // when 'guess' btn is clicked a function compares the two words one array element at a time, if true = color the div, if false skip. set all used inputs to disabled.
 // if word is write, disable all rows and alert(?) score i.e. number of rows.
 // for each letter guessed, mark of that letter form keyboard
 // if all guesses wrong reveal the word at the bottom
 
 
-//make trello account
+//update trello account
 //make a good readme. link to trello account 
 // add favicon
 
@@ -95,7 +91,6 @@ getRandomWord();
 function moveOnMax(field, nextFieldID) { 
     const maxLength = 1;
     let nextId =  parseInt(nextFieldID.match(/\d+/)[0], 10) + 1;
-    //console.log(nextId);
     
     let nextInput = document.getElementById(`input${nextId}`);
     
@@ -104,12 +99,20 @@ function moveOnMax(field, nextFieldID) {
     } 
 }  
 
-rightAsnwer() {
-
+function rightAsnwer(thisInput) {
+    const disableInputs = document.getElementById("mainBoard").style.pointerEvents = "none";
+    const finished =  document.getElementById("finishedBox").classList.add("show");
 }
 
-wrongAnswer() {
+function wrongAnswer(guessArray, randomWord, thisInput) {
 
+    for(let i = 0; i < 5; i++ ) {
+        if(guessArray[i] === randomWord[i]) {
+            inputList[i].style.backgroundColor = "#057805";
+        } else {
+            inputList[i].style.backgroundColor = "#a11919";
+        }
+    }
 }
 
 const checkAnswer = (thisInput) => {
@@ -125,15 +128,13 @@ const checkAnswer = (thisInput) => {
         btnsArr.forEach((inputValue) => {        
             guessArray.push(inputValue.value.toUpperCase());            
         });
-       const guess = guessArray.join('');
-       const answer = randomWord.join('');
-       console.log(typeof guess);
-       console.log(typeof answer);
+        const guess = guessArray.join('');
+        const answer = randomWord.join('');
 
         if(guess === answer) {
-            rightAsnwer();
+            rightAsnwer(thisInput);
         } else {
-            wrongAnswer();
+            wrongAnswer(guessArray, randomWord, thisInput);
         }
     } 
  }
@@ -146,18 +147,18 @@ for (let i = 0 ; i < inputList.length; i++) {
         let nextInput = event.target.getAttribute('id');
 
         moveOnMax(thisInputValue, nextInput);
+        // change this so it only happens when enter is pressed, or guess button clicked
+        if (event.key === 'Enter') {
+            checkAnswer(thisInput);
+            
 
-        checkAnswer(thisInput);
+            const rows = thisInput.parentElement.parentElement;
+            console.log(rows)
+            //if this is the last input, reveal next row and freeze current row with: .style.pointerEvents = "none";
+            if(thisInput == false) {
+                console.log('last one')
+            }
+        }
+    });
 
-      });
-
-    }
-
-
-
-
-
-
-    // move this to happen only once row is submitted
-//event.target.style.pointerEvents = "none";
-      
+};
