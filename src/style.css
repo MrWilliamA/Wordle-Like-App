@@ -20,10 +20,15 @@ body {
     justify-content: space-evenly;
 }
 
+.inputRow:not(.disabled) input {
+    box-shadow: #71d4fe3b 0px 0px 55px 10px;
+}
+
 #mainBoard article {
     border: solid 1px grey;
     flex-basis: 18%;
     max-height: 97px;
+    border-radius: 10px;
 }
 
 #mainBoard input {
@@ -34,12 +39,14 @@ body {
     text-transform: capitalize;
     color: white;
     text-align: center;
-    font-size: 6vw;
+    font-size: 5.5vw;
+    border-radius: 10px;
+    padding: 0;
 }
-
+/* 
 #mainBoard input:not(#row1 input) {
     pointer-events: none;
-}
+} */
 
 #keyboard {
     margin-top: 25px;
@@ -63,12 +70,28 @@ body {
 .keyboardLine span:hover {
     -webkit-filter: drop-shadow(0px 1px 15px #71D4FE8);
     filter: drop-shadow(0px 1px 8px #71D4FE);
-  }
+}
 
-  /* disable all but first row on inputs to begin with */
-  .disabled input {
+.keyboardLine span:before, .keyboardLine span:after {
+    content: "\00a0";
+}
+
+span.guessedRight {
+    text-decoration: line-through;
+    background-color: rgb(5, 120, 5);
+    opacity: 0.6;
+}
+
+span.guessedWrong {
+    text-decoration: line-through;
+    background-color: rgb(161, 25, 25);
+    opacity: 0.6;
+}
+
+.disabled {
     pointer-events:none;
-  }
+    opacity: 0.6;
+}
 
 #finishedBox {
     display: none;
