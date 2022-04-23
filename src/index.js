@@ -116,32 +116,53 @@ function wrongAnswer(guessArray, randomWord, rows) {
     
     const inputColour = rows.children;
 
+
+ 
     for(let i = 0; i < 5; i++ ) {
+
+        //convert word to array one letter at a time
+        const foundArray = Object.values(randomWord[i]);
+        // console.log(foundArray)
+
+
+        // gives true or false if letter exists in guess
+        const found = foundArray.some(r=> guessArray.includes(r));
+        
+        // console.log(found)
+        
         if(guessArray[i] === randomWord[i]) {
+
+            console.log(`this letter should be green - ${inputColour[i]}`)
             inputColour[i].style.backgroundColor = "rgb(5 120 5)";
-            console.log(guessArray[i])
-
-
-            // get keyboard element b innertext?
-            // const keyboard = document.querySelectorAll('.keyboardLine span').innerHTML;
 
             const keyboard = [].map.call(document.querySelectorAll('.keyboardLine span'), function(el) {
                 if(el.innerHTML == guessArray[i]){
                     el.classList.add("guessedRight");;
                 }
             })
-            
-            
-
-        } else {
+        } 
+        else if(guessArray[i] !== randomWord[i] && !found) {
             inputColour[i].style.backgroundColor = "rgb(161 25 25)";
+            console.log(`this letter should be red - ${inputColour[i]}`)
             const keyboard = [].map.call(document.querySelectorAll('.keyboardLine span'), function(el) {
                 if(el.innerHTML == guessArray[i]){
                     el.classList.add("guessedWrong");;
                 }
-            })
-            
+            })   
         }
+        
+        else if(guessArray[i] !== randomWord[i] && found) {
+            
+            // console.log(inputColour[i])
+            const yellowLetter = guessArray[i];
+            console.log(`this letter should be yellow - ${yellowLetter}`)
+            const test = guessArray.indexOf(yellowLetter);
+            console.log(`this is the index of the yellow letter - ${test}`)
+            inputColour[test].style.backgroundColor = "yellow";
+
+        } 
+
+        
     }
 
 }
