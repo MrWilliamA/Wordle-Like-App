@@ -137,7 +137,7 @@ function wrongAnswer(guessArray, randomWord, rows) {
 
             const keyboard = [].map.call(document.querySelectorAll('.keyboardLine span'), function(el) {
                 if(el.innerHTML == guessArray[i]){
-                    el.classList.add("guessedRight");;
+                    el.classList.add("guessedRight");
                 }
             })
         } 
@@ -146,7 +146,7 @@ function wrongAnswer(guessArray, randomWord, rows) {
             console.log(`this letter should be red - ${inputColour[i]}`)
             const keyboard = [].map.call(document.querySelectorAll('.keyboardLine span'), function(el) {
                 if(el.innerHTML == guessArray[i]){
-                    el.classList.add("guessedWrong");;
+                    el.classList.add("guessedWrong");
                 }
             })   
         }
