@@ -43,6 +43,7 @@ body {
     border: none;
     text-transform: capitalize;
     color: white;
+    text-shadow: 0px 0px 11px #00000070;
     text-align: center;
     font-size: 5.5vw;
     border-radius: 10px;
