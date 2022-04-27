@@ -91,16 +91,18 @@
 			    <span>Y</span>
 			    <span>Z</span>
             </div>
-
+            <button id="viewScores">VIEW PAST SCORES</button>
        </div>
     </div>
+    <div id="pastScores"><h1>ALL SCORES</h1><div id="scoreTableContainer"><table></table></div><p id="closeScores">CLOSE</p></div>
      <div id="finishedBox">
           <div class="finishedBoxInner">
                <h2>FINISHED!</h2>
-               <p>This game has ended</p>
+               <p id="passMark">This game has ended:<span></span></p>
                <p>Your score:</p>
                <p id="userScore"></p>
                <p id="answer"></p>
+               <button id="newScore">SUBMIT SCORE</button>
                <button id="restart" onClick="window.location.reload();">RESTART</button>
           </div>
      </div>

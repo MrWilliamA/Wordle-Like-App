@@ -49,10 +49,6 @@ body {
     border-radius: 10px;
     padding: 0;
 }
-/* 
-#mainBoard input:not(#row1 input) {
-    pointer-events: none;
-} */
 
 #keyboard {
     margin-top: 25px;
@@ -99,7 +95,7 @@ span.guessedWrong {
     opacity: 0.6;
 }
 
-#finishedBox {
+#finishedBox, #pastScores {
     display: none;
     width: 100%;
     height: 100%;
@@ -111,7 +107,9 @@ span.guessedWrong {
     font-family: 'Black Ops One', cursive;
 }
 
-#finishedBox.show {
+#pastScores {  padding-top: 8%; }
+
+#finishedBox.show, #pastScores.show {
     display: block;
 }
 
@@ -129,11 +127,83 @@ span.guessedWrong {
     font-size: 4em;
 }
 
-#restart {
-    padding: 9px 15px;
+#restart, #newScore, #viewScores {
+    padding: 11px 15px;
     margin: 12px;
-    background-color: white;
-    color: grey;
+    background-color: #0000004a;
+    border: 2px solid #71d4fe;
+    color: #bdbdbd;
     font-weight: bold;
     cursor: pointer;
+}
+
+#passMark span.fail { 
+    color: rgb(161, 25, 25);
+}
+
+#passMark span.success { 
+    color: rgb(5, 120, 5);
+}
+
+#closeScores {
+    cursor: pointer;
+    width: 100px;
+    margin: 20px auto;
+    line-height: 40px;
+    color: black;
+    background-color: #71d4fe;
+}
+
+#pastScores table { 
+    margin: auto;
+    border-collapse: collapse;
+    max-height: 70%;
+}
+
+#pastScores table tr:before {
+    content: "";
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    margin-right: 10px;
+} 
+
+#pastScores table tr.fail:before {
+    background-color: rgb(161, 25, 25);
+} 
+
+#pastScores table tr.success:before {
+    background-color: rgb(5, 120, 5);
+} 
+
+#scoreTableContainer { 
+    overflow-y: scroll;
+    width: 70%;
+    min-width: 500px;
+    height: 50%;
+    margin: auto;
+ }
+
+ #scoreTableContainer::-webkit-scrollbar {
+    background-color: rgb(63, 63, 63);
+}
+
+#scoreTableContainer::-webkit-scrollbar-thumb {
+    background-color: #71d4fe;
+}
+
+
+#pastScores h1 { 
+    background-color: #71d4fe;
+    color: black;
+    padding: 10px;
+}
+
+#pastScores table tr {
+    font-size: 1.6em;
+    line-height: 2.5em;
+}
+
+#pastScores table tr:not(:last-child) {
+    border-bottom: solid 2px white;
 }
