@@ -1,9 +1,4 @@
 // All interactions between the client and the API should be handled asynchronously
-// incorporate at least 3 separate event listeners.
-// add one for keyboard clicks, make them clickable?
-// add one for restart button
-// disable numbers from fetch? and spaces
-// update trello account
 // make a good readme. link to trello account
 
 let randomWord = '';
@@ -19,19 +14,20 @@ const options = {
   },
 };
 
+async function formatWord(result) {
+  randomWord = await result.word.replace(/[^a-zA-Z0-9 ]/g, '').toUpperCase();
+  return randomWord;
+}
+
 const getRandomWord = async () => {
-  fetch(
-    'https://wordsapiv1.p.rapidapi.com/words/?letters=5&random=true&letterPattern=[^-_]',
-    options,
-  )
-    .then((response) => response.json())
-    .then((response) => {
-      randomWord = response.word
-        .replace(/[^a-zA-Z0-9 ]/g, '')
-        .toUpperCase();
-      console.log(randomWord);
-    })
-    .catch((err) => console.error(err));
+  const apiUrl = 'https://wordsapiv1.p.rapidapi.com/words/?letters=5&random=true&letterPattern=[^-_0-7\s]';
+  try {
+    const result = await fetch(apiUrl, options);
+    const wordz = await result.json();
+    await formatWord(wordz);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 getRandomWord();
@@ -200,23 +196,23 @@ newScoreBtn.addEventListener('click', (event) => {
   postScore(scoreObj);
 });
 
-function postScore(scoreObj) {
-  fetch('http://localhost:3000/scores', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-    },
-    body: JSON.stringify({
-      date: scoreObj.date,
-      score: scoreObj.score,
-    }),
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      alert('There was an error');
-      console.log(error.message);
-    });
+async function postScore(scoreObj) {
+  const url = 'http://localhost:3000/scores';
+  try {
+    let result = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        date: scoreObj.date,
+        score: scoreObj.score,
+      }),
+    })
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function createScoreList(score) { 
@@ -230,10 +226,14 @@ function createScoreList(score) {
   }
 }
 
-
-function getScores() {
-  return fetch('http://localhost:3000/scores')
-    .then(res => res.json());
+async function getScores() {
+  const url = 'http://localhost:3000/scores';
+  try {
+    let result = await fetch(url);
+    return await result.json();
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 const viewPastScores = document.getElementById('viewScores');
@@ -251,6 +251,6 @@ viewPastScores.addEventListener('click', (event) => {
 
 const closeScores = document.getElementById('closeScores');
 closeScores.addEventListener('click', (event) => {
-document.getElementById('pastScores').classList.remove("show")
+  document.getElementById('pastScores').classList.remove("show")
 
 })
