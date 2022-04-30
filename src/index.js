@@ -1,6 +1,3 @@
-// All interactions between the client and the API should be handled asynchronously
-// make a good readme. link to trello account
-
 let randomWord = '';
 const inputListNode = document.querySelectorAll('input');
 
@@ -153,7 +150,6 @@ function disableEnableRows() {
 
 function moveNextRow(thisInput) {
   const finishInput = parseInt(thisInput.id.split('').pop());
-  // const nextRowInputId = `input${finishInput}`;
   const nextRow = document.getElementById(`row${idNum}`);
 
   if (finishInput % 5 === 0 && thisInput.id != 'input30') {
@@ -252,5 +248,4 @@ viewPastScores.addEventListener('click', (event) => {
 const closeScores = document.getElementById('closeScores');
 closeScores.addEventListener('click', (event) => {
   document.getElementById('pastScores').classList.remove("show")
-
 })
